@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>House Price Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<header>
+    <h1>Development of a Predictive Regression Model for House Prices</h1>
+    <p>Using Ensemble Stacking Techniques</p>
+</header>
+
+<main class="main-content">
+    <div class="container">
+        <h2>Business Understanding</h2>
+        <p>Industri properti sangat dinamis dan memiliki dampak besar terhadap ekonomi. Proyek ini bertujuan untuk menyediakan sistem prediksi harga rumah berbasis machine learning untuk membantu pemangku kepentingan dalam pengambilan keputusan yang lebih cepat dan tepat.</p>
+
+        <h2>Data Understanding</h2>
+        <h3>Deskripsi Data</h3>
+        <p>Dataset diambil dari kompetisi "House Prices - Advanced Regression Techniques" di Kaggle. Fitur numerik dan kategorikal dipilih untuk model prediksi, dengan target utama adalah harga jual rumah (SalePrice).</p>
+
+        <h3>Distribusi Harga Rumah</h3>
+        <p>Distribusi harga rumah menunjukkan pola positively skewed, dengan harga mayoritas di kisaran rendah dan beberapa harga tinggi yang jauh lebih tinggi (outlier).</p>
+
+        <h2>Prediction Input</h2>
+        <p>Masukkan data fitur rumah untuk prediksi harga:</p>
+
+        <form action="/predict" method="post">
+            <label for="overall_quality">Overall Quality (1–10):</label>
+            <input type="number" id="overall_quality" name="overall_quality" required>
+
+            <label for="year_built">Year Built:</label>
+            <input type="number" id="year_built" name="year_built" required>
+
+            <label for="year_remod_add">Year Remodeled:</label>
+            <input type="number" id="year_remod_add" name="year_remod_add" required>
+
+            <label for="total_bsmt_sf">Total Basement SF:</label>
+            <input type="number" id="total_bsmt_sf" name="total_bsmt_sf" required>
+
+            <label for="first_flr_sf">1st Floor SF:</label>
+            <input type="number" id="first_flr_sf" name="first_flr_sf" required>
+
+            <label for="gr_liv_area">Above Ground Living Area (GrLivArea):</label>
+            <input type="number" id="gr_liv_area" name="gr_liv_area" required>
+
+            <label for="full_bath">Full Bathrooms:</label>
+            <input type="number" id="full_bath" name="full_bath" required>
+
+            <label for="total_rooms_abv_grd">Total Rooms Above Ground:</label>
+            <input type="number" id="total_rooms_abv_grd" name="total_rooms_abv_grd" required>
+
+            <label for="garage_cars">Garage Capacity (Cars):</label>
+            <input type="number" id="garage_cars" name="garage_cars" required>
+
+            <label for="garage_area">Garage Area (sqft):</label>
+            <input type="number" id="garage_area" name="garage_area" required>
+
+            <input type="submit" value="Predict Price">
+        </form>
+
+        {% if predicted_price %}
+        <h2>Prediction Result</h2>
+        <p>The predicted price for the house is: <strong>${{ predicted_price | round(2) }}</strong></p>
+        {% endif %}
+    </div>
+</main>
+
+</body>
+</html>
